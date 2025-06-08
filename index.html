@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>doribowen</title>
+    <script type="text/javascript" nonce="4c5d5f92f48140218d98c134304" src="//local.adguard.org?ts=1748718648626&amp;type=content-script&amp;dmn=doribowen.hu&amp;url=https%3A%2F%2Fdoribowen.hu%2F&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script>
+<script type="text/javascript" nonce="4c5d5f92f48140218d98c134304" src="//local.adguard.org?ts=1748718648626&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpg" href="bowen-logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <style>
+
+  /* ============================================
+   MOBILE OVERRIDES (≤768px)
+   ============================================ */
+@media (max-width: 768px) {
+  /* ... egyéb meglévő stílusok ... */
+
+  /* Nyílt nap felirat kisebb mobilnézetben */
+  #nyilt-nap-felirat div {
+    font-size: 18px !important;
+    letter-spacing: 2px !important;
+    padding: 15px 0 !important;
+  }
+}
+
+/* ============================================
+   EXTRA OVERRIDES FOR VERY SMALL SCREENS (≤480px)
+   ============================================ */
+@media (max-width: 480px) {
+  /* Nyílt nap felirat még kisebb nagyon kis képernyőkön */
+  #nyilt-nap-felirat div {
+    font-size: 16px !important;
+    letter-spacing: 1px !important;
+    padding: 10px 0 !important;
+  }
+}
+  /* --- Header: stack logo, contact, nav vertically --- */
+  header {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    grid-template-columns: none !important; /* undo desktop's three-column grid */
+  }
+
+  /* Logo centered */
+  .logo-container {
+    margin-bottom: 8px;
+  }
+
+  /* Contact info stacked and centered */
+  .contact-info {
+    flex-direction: column !important;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 6px;
+  }
+
+  /* Nav links: make each link full-width and center text */
+  .navbar ul {
+    flex-direction: column !important;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .navbar ul.show {
+    max-height: 500px; /* Adjust based on your content */
+  }
+
+  .navbar ul li {
+    width: 100%;
+    text-align: center;
+    margin: 6px 0;
+  }
+
+  .navbar ul li a {
+    display: block;
+    padding: 8px 0;
+    font-size: 16px;
+  }
+
+  /* Hamburger menu icon */
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* --- Hero section: add margin-top to account for sticky header --- */
+  .hero {
+    margin-top: 60px; /* Adjust this value based on your header height */
+    padding: 80px 10px 40px !important;
+  }
+
+  /* ... rest of your existing mobile styles ... */
+
+
+/* Hamburger menu icon styles */
+.hamburger {
+  display: none; /* Hidden by default */
+  font-size: 24px;
+}
+
+/* Show hamburger only on mobile */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  /* Hide regular nav by default on mobile */
+  .navbar ul {
+    display: none;
+  }
+  .navbar ul.show {
+    display: flex;
+  }
+}
+/* ============================================
+   MOBILE OVERRIDES (≤768px)
+   ============================================ */
+@media (max-width: 768px) {
+  /* ... egyéb meglévő stílusok ... */
+
+  /* Hero section kisebb mobilnézetben */
+  .hero {
+    padding: 60px 10px 30px !important;
+  }
+
+  .hero h1 {
+    font-size: 18px !important;
+    line-height: 1.4;
+    max-width: 95%;
+  }
+
+  .hero-image {
+    height: 150px !important; /* vagy amennyire szeretnéd kisebbre */
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Profilkép kisebb mérete mobilnézetben */
+  #rolam img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+}
+
+/* ============================================
+   EXTRA OVERRIDES FOR VERY SMALL SCREENS (≤480px)
+   ============================================ */
+@media (max-width: 480px) {
+  /* Hero section még kisebb nagyon kis képernyőkön */
+  .hero h1 {
+    font-size: 16px !important;
+  }
+
+  .hero-image {
+    height: 120px !important;
+  }
+
+  /* Profilkép még kisebb mérete */
+  #rolam img {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+
+</style>
+
+    </style>
+</head>
+<body>
+
+    <header class="header" style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 10px 20px;">
+      <!-- Bal oldal: logó -->
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="bowen-logo.png.jpg" alt="Bowen logó" style="height: 40px; border-radius: 4px;">
+        <span style="font-weight: bold; color: #4A7C59;">doribowen.hu</span>
+      </div>
+
+      <!-- Középső: kontaktadatok -->
+      <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+        <a href="tel:+36706766076" style="color: #4A7C59; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+          📞 <span>+36 70 676 6076</span>
+        </a>
+        <a href="mailto:dori@doribowen.hu" style="color: #4A7C59; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+          📧 <span>dori@doribowen.hu</span>
+        </a>
+      </div>
+
+      <!-- Jobb oldal: menü -->
+      <nav class="navbar" style="justify-self: end;">
+        <ul style="display: flex; gap: 15px; list-style: none; padding: 0; margin: 0;">
+          <li><a href="#bowenrol">A Bowenről</a></li>
+          <li><a href="#rolam">Rólam</a></li>
+          <li><a href="#bowen-eletrajz">Tom Bowen</a></li>
+          <li><a href="#alkalmazas">Alkalmazási területek</a></li>
+          <li><a href="#arak">Árak</a></li>
+        </ul>
+      </nav>
+    </header>
+ 
+    <section class="hero">
+        <div class="hero-image"></div>
+        <h1>A BOWEN-TECHNIKA TÁMOGATJA TESTED ÖNGYÓGYÍTÓ FOLYAMATAIT</h1>
+    </section>
+
+  <section id="nyilt-nap-felirat" style="background-color: white; padding: 20px 0; text-align: center;">
+  <div style="font-size: 24px; color: red; font-weight: bold; letter-spacing: 4px;">
+    NYÍLT NAP!&nbsp;&nbsp;&nbsp;&nbsp;NYÍLT NAP!&nbsp;&nbsp;&nbsp;&nbsp;NYÍLT NAP!&nbsp;&nbsp;&nbsp;&nbsp;NYÍLT NAP!
+  </div>
+</section>
+ <section id="nyilt-nap-" style="background-color: white; padding: 20px 0; text-align: center;"></section>
+<style>
+  /* CSAK a szöveges tartalom blokk fehér háttérhez */
+  section[style*="font-family: sans-serif"] {
+    background-color: white;
+    margin: 0;
+    padding: 20px;
+  }
+
+
+</style>
+ <section style="font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; background-color: white;">
+
+ <strong></strong> <p><strong>Sok szeretettel várunk mindenkit <span style="color: red;">Jótékonysági Bowen Nyílt nap</span>unkra</p>
+  <p>2025. június 14-én szombaton 15:00–18:00 között (érkezés legkésőbb 17.30-ig)<br>
+  a LaPlace Stúdióban (1025 Budapest, Szépvölgyi út 44.)
+  kedvező áron próbálhatod ki a kezelést, és ezzel a Bethesda Gyermekkórház fül-orr-gégészeti osztályát támogatod, akik egy speciális mikrószkópra gyűjtenek!</strong></p>
+  <br>
+  <p>A Bowen technika teljesen új fogalom a test kezelését illetően, amely kevés, de jól adagolt fizikális információval stimulálja a testet, hogy az önmagát gyógyítsa. Nem származtatható más módszerekből, és nem hasonló semmilyen más fizikális megközelítéshez.<br>
+  A technika részletesebb leírását itt lent találod.</p><br>
+   
+  <p>Miért érdemes eljönnöd június 14-én?</p>
+  <ul style="list-style: none; padding-left: 0;">
+    <li>➯Ha még nem ismered a Bowen technikát, de érdekel,</li>
+    <li>➯Ha már hallottál róla, de még nem próbáltad,</li>
+    <li>➯Ha már próbáltad, és tetszett/segített,</li>
+    <li>➯Ha szeretnél támogatni egy jó ügyet (a Bethesda Kórház fül-orr-gégészeti osztályát, akik egy speciális mikrószkópra gyűjtenek)</li>
+  </ul><br>
+
+  <p>Mire számíthatsz?</p>
+  <ul style="list-style: none; padding-left: 0;">
+    <li>➯kb 15–20 perces kezelés (a legproblémásabb területen)</li>
+    <li>➯Jó hangulat</li>
+    <li>➯profi alkalmazók</li>
+  </ul><br>
+
+  <p>A célzott, lágy fogásokat leginkább közvetlenül a bőrön végezzük, de vékony, laza ruházatban is végrehajtható a kezelés. Tekintettel arra, hogy itt egyszerre több kezelés is lesz a teremben, kérünk, hogy gondoskodj megfelelő ruházatról.<br>
+  A teremben cipő használata tilos. Vannak vendégpapucsok, de ha úgy kényelmesebb, hozz magaddal papucsot vagy vastag zoknit.</p><br>
+
+  <p>A belépő ára: 8.000 Ft / fő<br>
+  Gyermekeknek (0–18 év): 5.000 Ft<br>
+  Kérünk, az összeget kiszámolva, készpénzben hozd magaddal.</p><br>
+
+  <p>Sok szeretettel várunk mindenkit!<br>
+  Hozd magaddal a családodat, barátaidat!</p>
+</section>
+
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Ugrás a tetejére">↑</button>
+
+
+    <section id="bowenrol" class="section">
+      <h2>A Bowen technika</h2>
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <p> egy dinamikus izom és kötõszöveti módszer, amely kevés, de jó adagolt fizikális információval stimulálja a testet, hogy az önmagát gyógyítsa, gyakran mélyreható és alapos változásokat eredményezve.</p>
+      </div>
+      <div id="bowenrol-full" style="display: none; max-width: 800px; margin: 0 auto; text-align: center;">
+        <p>A Bowennel nem kórképekre, hanem az egész emberre fókuszálunk. Nem kezelünk betegségeket, hanem feszültségállapotokat közömbösítünk a testben. „A kevesebb több” mottónk a gyakorlatban azt jelenti, hogy minél nagyobb a probléma, annál kevesebb fogást alkalmazunk. A Bowen Technika kiválóan alkalmas egyszerűen ellazulásra és feltöltődésre, de ugyanolyan jól alkalmazható akut és akár hosszú évek óta fennálló krónikus állapotok esetén is.</p>
+        <p>A Bowen Technika karakteres jellemzője, hogy a mozdulat szekvenciák között hosszabb rövidebb szüneteket tartunk. Egy Bowen fogás után az ingert az izmok, és a szövetek érzőidegei által a központi idegrendszer regisztrálja, és az agy különböző területeit aktiválva a motorikus pályán egy visszacsatolást hoz létre. Ebben a folyamatban a központi idegrendszer úgymond összehasonlítja a bejövő adatot a test eredeti feszültség mintáinak tervével.</p>
+        <p>A Bowen Technika jól ismert a kötőszövetekre kifejtett kiváló hatásáról. A fasciákban keletkezett letapadásokat, keményedéseket igen hatásosan oldja, ezzel helyreállítva a kötőszöveti, és ezáltal minden egyéb struktúra áteresztőképességét, átjárhatóságát. Ez a folyadék keringés, és így az anyagcsere folyamatok, valamint az idegi ellátás optimalizálásához vezet, melynek keretében a funkcionalitást zavaró káros anyagok illetve méreganyagok kiválasztódnak és kiürülnek a szervezetből.</p>
+      </div>
+      <div class="button-center" style="text-align: center; margin-top: 40px;">
+        <button id="toggle-bowenrol" onclick="
+          (function(btn){
+            var full = document.getElementById('bowenrol-full');
+            if (!full) return;
+            if (full.style.display === 'none') {
+              full.style.display = 'block';
+              btn.innerHTML = 'Kevesebb ⌃';
+              full.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              full.style.display = 'none';
+              btn.innerHTML = 'Olvass tovább ⌄';
+              document.getElementById('bowenrol').scrollIntoView({ behavior: 'smooth' });
+            }
+          })(this);
+        ">Olvass tovább ⌄</button>
+      </div>
+    </section>
+    
+
+
+    <section id="rolam" class="section light-bg">
+      <h2>Rólam</h2>
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <img src="IMG_0011.jpg" alt="Gábor Dóri portré" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 30px;">
+        <div id="rolam-preview">
+          <p>Gábor Dóri vagyok, 2019-ben kezdtem foglalkozni masszázsokkal, és 2024 óta a Bowen technikával. A segítő szakma az a terület, amely örömmel tölt el. Folyamatosan tanulok, képzem magam, hogy minél hatékonyabban, magasabb szinten tudjam segíteni a klienseimet.</p>
+          <div class="button-center">
+            <button id="toggle-rolam" onclick="
+    (function(btn){
+      var full = document.getElementById('rolam-full');
+      var previewBtn = document.getElementById('rolam-preview').querySelector('.button-center');
+      var fullBtnContainer = document.getElementById('rolam-btn-container');
+      if(!full) return;
+      if(full.style.display === 'none'){
+        full.style.display = 'block';
+        btn.innerHTML = 'Olvass tovább ⌄';
+        if(previewBtn) previewBtn.style.display = 'none';
+        if(fullBtnContainer) fullBtnContainer.style.display = 'block';
+      } else {
+        full.style.display = 'none';
+        btn.innerHTML = 'Olvass tovább ⌄';
+        if(previewBtn) previewBtn.style.display = 'block';
+        if(fullBtnContainer) fullBtnContainer.style.display = 'none';
+        document.getElementById('rolam').scrollIntoView({ behavior: 'smooth' });
+      }
+    })(this);
+  ">Olvass tovább ⌄</button>
+          </div>
+        </div>
+        <div id="rolam-full" style="display: none;">
+          <p>Amikor rátaláltam a Bowen technikára, alaposan utánaolvastam, esettanulmányokat böngésztem, és rövid időn belül tudtam, hogy megtaláltam azt, ami igazán én vagyok! Azonnal jelentkeztem a képzésre, ami két héttel később indult (még csak várnom sem kellett rá 😊). Ez is megerősített abban, hogy jó úton haladok.</p>
+          <p>Azóta folyamatosan, nap mint nap tapasztalom azokat a csodákat, amit a Bowen technika rejt magában! És ami a legfontosabb, a klienseim is boldogan, elégedetten, lényegesen jobb közérzettel, kevesebb fájdalommal (vagy akár fájdalommentesen) távoznak tőlem minden alkalommal!</p>
+          <p>Engem meggyőzött a technika, pedig elég szkeptikus vagyok. Ha Te is hasonlóan érzel, gyere és próbáld ki, biztos vagyok benne, hogy pozitív tapasztalatokkal fogsz gazdagodni!</p>
+          <p><strong>Bejelentkezés csak telefonon:</strong><br>+36 70 676 6076</p>
+          <div class="button-center" id="rolam-btn-container" style="margin-top: 20px;">
+            <button id="toggle-rolam-full" onclick="
+    (function(btn){
+      var full = document.getElementById('rolam-full');
+      var previewBtn = document.getElementById('rolam-preview').querySelector('.button-center');
+      if(!full) return;
+      full.style.display = 'none';
+      previewBtn.style.display = 'block';
+      document.getElementById('rolam').scrollIntoView({ behavior: 'smooth' });
+    })(this);
+  ">Kevesebb ⌃</button>
+          </div>
+        </div>
+      </div>
+  </section>
+
+    <section id="bowen-eletrajz" class="section light-bg">
+      <h2>Thomas Ambrose Bowen élete</h2>
+      <img src="csm_tom2coltiff_8495f6e3dc.jpg" alt="Thomas Ambrose Bowen portré" style="display: block; max-width: 200px; margin: 0 auto 20px; border-radius: 8px;">
+      <div id="eletrajz-preview">
+          <p>Thomas A. Bowen (1916–1982) tudását autodidaktaként szerezte és fejlesztette, létrehozva egy egyedülálló és független kezelési rendszert, amit ma Bowen Technika néven emleget az egész világ. Tom Bowen egy kivételes képességekkel rendelkező, az ember szemléletét és a test kezelését illetően mély belső bölcsességgel megáldott minimalista tehetség volt.</p>
+      <div id="eletrajz-full" style="display:none;">
+        <p>Körülbelül 15 éves korában elhagyta az iskolát és apja mellett kitanulta az ács szakmát. Apja nem támogatta fia bármilyen nemű továbbtanulását, mert úgy gondolta, elég annyit tudni, hogy az ember munkát kapjon.</p>
+  <p>1941-ben megnősült, és feleségével Jessie McLean-nel a Viktória állambeli Geelongba költöztek. Három gyermekük született. Jessie igen súlyos asztmás volt, amely gyakran igényelt kórházi ellátást. Tom Bowen erős késztetést érzett, hogy segítsen rajta, ami odavezetett, hogy elkezdett foglalkozni Jessie étkezésével. A diétával és a számára kitalált kezelési technikáival, valamint egy helyi gyógyszerésztől Tom rendelésére készített orvossággal jelentős állapotjavulást értek el. Olyannyira, hogy később elhagyták a gyógyszeres kezelést és nem szorultak többé kórházi segítségre sem. Ez a hozzáállás teljesen rendhagyó volt ebben a korban.</strong></p>
+  <p>  Bowen az 1950-es évek elején találkozott Ernie Saunders-szel, korának híres manuál terapeutájával, akivel rengeteg időt töltött együtt. Ez a találkozás volt Tom Bowen későbbi munkásságának inspirációja és életének fordulópontja. Ez alatt az idő alatt fejlődött ki alapvető hozzáállása a kezelésekhez és fedezte fel saját képességeit. Nem sokkal később Bowen ötletei meghaladták partnerének szakmai szintjét, így útjaik elváltak. Tom Bowen saját finomodó képességei mentén alakította, fejlesztette technikáját, és későbbi pályafutása során mentoraként emlegette őt.</strong></p>
+  <p>  Bowen ez idő tájt a geelongi cementgyárban dolgozott, és egy helyi ausztrál futball klubnál volt segédedző „masszőr”. Érdeklődése a test kezelését és a gyógyítást illetően nőttön nőtt. Furcsa és szokatlan kezeléseinek hatékonysága mások számára is egyre nyilvánvalóbbá vált. Eleinte a környezetét kezelte, „rossz hátakkal” és egyéb bajokkal, de hamarosan híre ment, hogy néhány egyszerű mozdulattal segíteni tud a legkülönbözőbb problémákon, így egyre többen keresték őt.</p>
+  <p>Egyik cementgyári kollégája, Stan Horwood erősen hitt Bowen képességeiben, ösztönözve őt, felajánlotta egyik ingatlanát. Tom Bowen itt alapította meg első praxisát az ötvenes évek végén. Eleinte esténként, munkaidejének letelte után dolgozott.</p>
+  <p>A klinika egyre csak nőtt. Nem reklámozták, de szájról szájra terjedt a híre, és az emberek egymásnak adták a kilincset. Sokszor órákkal a nyitás előtt autók hosszú sora állt az épület előtt. Ekkorra már szükségszerűvé vált Mrs. Rene Horwood segítsége, aki recepciós asszisztensként haláláig kísérte Tom Bowen munkásságát. Egyúttal költözniük is kellett a megnövekedett igények miatt. Ezt követően Bowen teljes munkaidőben kezdett dolgozni saját klinikáján.</p>
+  <p>A segíteni akarás és tudás óriási örömmel töltötte el, és ez maradt figyelmének fókuszában egészen haláláig. Nem mindig tudta a választ a kliens által hozott kérdésre, de gondolkodott rajta, analizálta, és néhány nappal később szinte mindig előrukkolt a megoldással.</p>
+  <p>Tom Bowen folyamatosan adaptálta és fejlesztette tehetségét az elé kerülő problémák megoldásához – talán tartva magát valamiféle alapokhoz, de mindig valamilyen improvizált megközelítéssel dolgozva.</p>
+  <p><em>Volt egy kedvenc mondása, amely áthatotta életét:</em></p>
+  <p><em>„Úgy vélem e világon csak egyszeri átutazó vagyok. Ezért engedtessék meg nekem, hogy most tegyem meg mindazt a jót, most mutassam ki embertársaim iránt mindazt a kedvességet, amit csak lehet. Adassék meg, hogy ne halogassam vagy mulasszam el mindezt, hiszen utam erre többé nem vezet.”</em></p>
+</div>
+      </div>
+      <div class="button-center">
+        <button id="toggle-eletrajz">Olvasd tovább ⌄</button>
+      </div>
+    </section>
+
+    <section id="alkalmazas" class="section">
+      <h2>Alkalmazási területek</h2>
+      <p>A Bowen Technika könnyen és rendkívül hatékonyan alkalmazható fizikai és pszichoszomatikus problémák széles spektrumában. Segítségünkre lehet többek között:</p>
+      <ul style="max-width: 800px; margin: 0 auto; font-size: 17px; list-style-type: disc; padding-left: 20px;">
+        <li>mozgás- és vázrendszerrel kapcsolatos problémák</li>
+        <li>bármilyen ízületi-, izomzati- és gerincbántalom, fájdalom esetén (váll, nyak, könyök, hát, láb, térd, boka, csípő)</li>
+        <li>fejfájás, migrén</li>
+        <li>allergia, szénanátha, asztma</li>
+        <li>fül-, szemproblémák, egyensúlyzavar</li>
+        <li>gyomor/emésztés, epe-, máj-, bélpanaszok</li>
+        <li>vese, húgyhólyag, húgyvezeték, vizelettartási problémák</li>
+        <li>ödéma, nyirokkeringési rendszer zavarai esetén</li>
+        <li>idegrendszeri problémák</li>
+        <li>gyulladásos panaszok</li>
+        <li>nőgyógyászati és menstruációs problémák</li>
+        <li>meddőség</li>
+        <li>terhesgondozás</li>
+        <li>mellpanaszok (ciszta, tejelválasztás)</li>
+        <li>csecsemő- és gyermekgondozás (mozgásfejlődés zavarai, viselkedési zavarok, diszfunkciók)</li>
+        <li>ágybavizelés</li>
+        <li>idősgondozás</li>
+        <li>bőrproblémák</li>
+        <li>rehabilitáció</li>
+        <li>megelőzés</li>
+      </ul>   
+      <p style="text-align: center; margin-top: 10px;">A BowenTechnika életkortól függetlenül kiválóan alkalmazható kizárólagos és kiegészítő kezelésként is. Ajánlott akut és krónikus állapotok kezelésére és megoldására, illetve az életminőség javítására.
+
+
+            </p>
+          </div>
+        </div>        
+    </section>
+
+    <section id="arak" class="section">
+        <h2>Árak</h2>
+        <p style="text-align: center; font-style: italic;">
+          Jelenleg csak Hölgyeket vagy házaspárokat fogadok, bejelentkezéskor kérlek ezt vedd figyelembe!
+        </p>
+        <table>
+          <tr>
+            <th>Kategória</th>
+            <th>Ár / alkalom</th>
+          </tr>
+          <tr>
+            <td>Felnőttek kezelése</td>
+            <td>18.000 Ft</td>
+          </tr>
+          <tr>
+            <td>Nyugdíjasok, kismamák és 18 év feletti diákok kezelése</td>
+            <td>16.000 Ft</td>
+          </tr>
+          <tr>
+            <td>Gyermekek kezelése</td>
+            <td>12.000 Ft</td>
+          </tr>
+
+
+
+  
+</p>
+  </div>
+</section>
+
+       </table>
+       <div id="fontos-info">
+    <p class="kiemelt">Fontos információ!!!</p>
+    <p>Ha valaki a kezelést, 24 órán belül lemondja, annak a készenléti díj összegét (ami a kezelési díj összege) a következő kezelés alkalmával ki kell egyenlítenie.
+</p>
+
+      <p style="text-align: center; margin-top: 0px;"><strong>
+        <div class="legal-notice-wrapper">
+  <img src="BOWTECH-Logo_web_trans.png" alt="BOWTECH logo" class="legal-logo" />
+  <p class="legal-text">
+    Jelen oldal üzemeltetője a jogvédett tartalmakat, ezen belül, de nem kizárólagosan a Bowen® és a Bowtech® logót és megjelölést a BTAA, és a BTAE, illetve ezen szervezetek magyarországi képviselőjének engedélyével használja.
+  </p>
+</div>
+
+    </section>
+
+    
+
+
+
+
+    <footer class="footer" style="position: relative;">
+        <p>&copy; 2025 DóriBowen - Minden jog fenntartva.</p>
+    </footer>
+
+    <script>
+      // Safari scroll reset workaround
+      window.history.scrollRestoration = 'manual';
+      window.addEventListener('beforeunload', function () {
+        window.scrollTo(0, 0);
+      });
+
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 1); // Safari-nak kell egy kis delay
+      });
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+      window.addEventListener('beforeunload', function () {
+        window.scrollTo(0, 0);
+      });
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.section');
+
+        const toggleBtn = document.getElementById('toggle-eletrajz');
+        const fullBio = document.getElementById('eletrajz-full');
+
+toggleBtn.addEventListener('click', () => {
+  if (fullBio.style.display === 'none') {
+    fullBio.style.display = 'block';
+    toggleBtn.innerHTML = 'Kevesebb ⌃';
+  } else {
+    fullBio.style.display = 'none';
+    toggleBtn.innerHTML = 'Olvasd tovább ⌄';
+    // görgetés az árak szekcióhoz
+    document.getElementById('alkalmazas').scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            } else {
+              entry.target.classList.remove('visible');
+            }
+          });
+        }, {
+          threshold: 0.1
+        });
+
+        sections.forEach(section => {
+          observer.observe(section);
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('show');
+        });
+
+        const rolamBtn = document.getElementById('toggle-rolam');
+        const rolamFull = document.getElementById('rolam-full');
+
+        rolamBtn.addEventListener('click', () => {
+          if (rolamFull.style.display === 'none') {
+            rolamFull.style.display = 'block';
+            rolamBtn.innerHTML = 'Kevesebb ⌃';
+            document.getElementById('rolam-preview').querySelector('.button-center').style.display = 'none';
+            document.getElementById('rolam-btn-container').style.display = 'block';
+          } else {
+            rolamFull.style.display = 'none';
+            rolamBtn.innerHTML = 'Olvass tovább ⌄';
+            document.getElementById('rolam-preview').querySelector('.button-center').style.display = 'block';
+            document.getElementById('rolam-btn-container').style.display = 'none';
+            document.getElementById('rolam').scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+
+
+        const bowenrolBtn = document.getElementById('toggle-bowenrol');
+        const bowenrolFull = document.getElementById('bowenrol-full');
+        const bowenrolBtnContainer = document.getElementById('bowenrol-btn-container');
+        const bowenrolPreview = document.getElementById('bowenrol-preview');
+
+        bowenrolBtn.addEventListener('click', () => {
+  if (bowenrolFull.style.display === 'none') {
+    bowenrolFull.style.display = 'block';
+    bowenrolBtn.innerHTML = 'Kevesebb ⌃';
+    setTimeout(() => {
+      bowenrolFull.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  } else {
+    bowenrolFull.style.display = 'none';
+    bowenrolBtn.innerHTML = 'Olvass tovább ⌄';
+    bowenrolPreview.scrollIntoView({ behavior: 'smooth' });
+  }
+
+
+
+
+}); // ← bezárja bowenrolBtn eventet
+      }); // ← bezárja DOMContentLoaded-et
+    </script>
+  </body>
+</html>
